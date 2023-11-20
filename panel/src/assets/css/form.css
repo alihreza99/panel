@@ -1,0 +1,113 @@
+.Log_form {
+  background-color: rgb(255, 255, 255);
+  width: 40%;
+  margin-top: 50px;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 30%;
+}
+.formtitle{
+  padding: 10px;
+  direction: rtl;
+}
+.form-control{
+  background-color: rgb(255, 255, 255);
+
+}
+.Log_form p {
+  color: red;
+}
+.errortext{
+  direction: rtl;
+}
+.form-control input {
+  width: 50%;
+  margin-left: 20%;
+  outline: none;
+  display: block;
+  width: 80%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  background: #fdffff;
+  color: rgb(2, 2, 2);
+}
+#check{
+  margin-left: 90%;
+}
+.log-button {
+  border: none;
+  border-radius: 5px;
+  background-color: #043a9e;
+  color: whitesmoke;
+  height: 50px;
+  width: 50%;
+  direction: rtl;
+  margin-left: 25%;
+  text-align: center;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::placeholder {
+  color: rgb(255, 255, 255);
+  opacity: 0.9;
+}
+.radio-parent {
+  margin-left: 10px;
+}
+
+label > sup {
+  color: red;
+}
+.repacparent{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.linktosign{
+  border: none;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+  color: rgb(0, 0, 0);
+  height: 50px;
+  width: 50%;
+  direction: rtl;
+  margin-left: 25%;
+  text-align: center;
+  border: black solid 1px;
+  margin-top: 10px;
+}
+.linktosigntext{
+  text-decoration: none;
+  color: black;
+  
+}
+@media only screen and (max-width: 1200px) {
+ .recap{
+  padding: 5px 10%;
+}
+#check{
+  margin-right: 10%;
+  margin-left: 70%;
+}
+}
+
+@media only screen and (max-width: 800px) {
+.Log_form {
+  width:100%;
+  margin-top: 50px;
+  border-radius: 6px;
+  position: relative;
+  margin-left: 0;
+}
+}

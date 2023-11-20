@@ -1,0 +1,23 @@
+.notfount {
+  background-color: rgb(167, 181, 187);
+  direction: rtl;
+  height: 20px;
+  width: 50%;
+  margin-top: 150px;
+  margin-left: 25%;
+  width: 600px;
+  height: 300px;
+}
+.notfount h1,
+p {
+  color: rgb(0, 0, 0);
+}
+.link {
+  margin-top: 15%;
+  color: rgb(15, 80, 88);
+  text-decoration: none;
+}
+
+.notfoundlinks {
+  margin-right: 10px;
+}
