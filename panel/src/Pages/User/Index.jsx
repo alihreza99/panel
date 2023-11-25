@@ -6,6 +6,7 @@ import UserList from ".././../components/userlist";
 import { store } from "./../../components/Redux/store";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -15,6 +16,21 @@ export default function Index() {
   const [itemid, setItemid] = useState("");
 
   function userdelete() {
+    toast("کاربر حذف شد", {
+      duration: 1000,
+      position: "top-center",
+      style: { background: "black", color: "white" },
+      className: "",
+      iconTheme: {
+        primary: "#000",
+        secondary: "#fff",
+      },
+
+      ariaProps: {
+        role: "status",
+        "aria-live": "polite",
+      },
+    });
     dispatch({
       type: "delete",
       payload: itemid,
