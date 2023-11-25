@@ -1,51 +1,38 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
-import store from "./../../components/Redux/store";
+import { store } from "./../../components/Redux/store";
 import { useDispatch } from "react-redux";
-import { Userdatas } from "../../data";
-
+import { useSelector } from "react-redux";
 const schema = yup.object().shape({
   firstname: yup.string().required("لطفا نام خود را وارد کنید"),
-  price: yup.string().required("لطفا مبلغ  ورودی خود را وارد کنید"),
-  email: yup.string().email().required("لطفا ایمیل خود را وارد کنید"),
+  pass: yup.string().required("لطفا رمز خود را وارد کنید"),
 });
 
 const App = () => {
   const dispatch = useDispatch();
   const recaptcha = useRef();
-  let [data, setdata] = useState({ Userdatas });
-
+  const users = useSelector((state) => state.log_control.entities);
   let [viewModelstate, setviewModelstate] = useState({
     username: "",
-    id: 5,
-    img: "./App/Pics/profilepic.jpg",
-    status: "active",
-    transaction: "",
-    email: "",
+    pass: "",
   });
 
   const handleChangename = (event) => {
     setviewModelstate({
       ...viewModelstate,
       username: event.target.value,
-      id: viewModelstate.id + 1,
     });
-    console.log("value is:", event.target.value);
+    console.log("value is:", users);
   };
-  const handleChangeemail = (event) => {
-    setviewModelstate({ ...viewModelstate, email: event.target.value });
-
-    console.log("value is:", event.target.value);
-  };
-  const handleChangeprice = (event) => {
+  const handleChangepass = (event) => {
     setviewModelstate({
       ...viewModelstate,
-      transaction: event.target.value,
+      pass: event.target.value,
     });
   };
   const {
@@ -57,12 +44,12 @@ const App = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     const captchaValue = recaptcha.current.getValue();
     if (!captchaValue) {
-      alert("Please verify the reCAPTCHA!");
+            toast.error("Please verify the reCAPTCHA!");
     } else {
-      toast("Successfully created", {
+      toast("با موفقیت وارد شدید", {
         duration: 1000,
         position: "top-center",
         style: { background: "black", color: "white" },
@@ -77,16 +64,73 @@ const App = () => {
           "aria-live": "polite",
         },
       });
+      const payload = users.find(
+        (user) => user.username === viewModelstate.username && user.pass == viewModelstate.pass
+      );
+      users.map((user)=>{
+        console.log(user.pass);
+      })
       dispatch({
         type: "log",
-        payload: viewModelstate,
+        payload: payload,
       });
+      console.log(store.getState());
+      window.grecaptcha.reset();
       reset();
     }
   };
   return (
     <>
-      <div className="Log_form">
+      <div class="login-box">
+        <p>Login</p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div class="user-box">
+            <input
+              {...register("firstname")}
+              type="text"
+              onChange={handleChangename}
+              autocomplete="off"
+            />
+            <label>
+              نام کاربری<sup className="errortext">*</sup>
+            </label>
+            <p className="errortext">{errors.firstname?.message}</p>
+          </div>
+          <div class="user-box">
+            <input
+              {...register("pass")}
+              type="password"
+              onChange={handleChangepass}
+            />
+            <label>
+              {" "}
+              رمز ورود<sup className="errortext">*</sup>
+            </label>
+            <p className="errortext">{errors.pass?.message}</p>
+          </div>
+          <button className="log-button" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            ورود
+          </button>
+        </form>
+        <p>
+          میخواهید اکانت بسازید ؟{" "}
+          <Link to="/sign" className="linktosigntext">
+            SIGN UP
+          </Link>
+          <div className="repacparent">
+            <ReCAPTCHA
+              ref={recaptcha}
+              className="recap"
+              sitekey="6Lf6KRQpAAAAAK0PHLUCqgyqHX_e8h2UsFMH7jyq"
+            />
+          </div>
+        </p>
+      </div>
+      {/* <div className="Log_form">
         <h2 className="formtitle">ورود</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
@@ -95,7 +139,6 @@ const App = () => {
             </label>
             <input
               {...register("firstname")}
-              placeholder="نام"
               type="text"
               onChange={handleChangename}
             />
@@ -103,39 +146,24 @@ const App = () => {
           </div>
           <div className="form-control">
             <label className="label">
-              مبلغ ورود<sup>*</sup>
+              رمز ورود<sup>*</sup>
             </label>
             <input
-              {...register("price")}
-              placeholder="نام"
-              type="number"
-              onChange={handleChangeprice}
+              {...register("pass")}
+              type="password"
+              onChange={handleChangepass}
             />
-            <p className="errortext">{errors.price?.message}</p>
+            <p className="errortext">{errors.pass?.message}</p>
           </div>
-          <div className="form-control">
-            <label>
-              ایمیل<sup>*</sup>
-            </label>
-            <input
-              {...register("email")}
-              placeholder="ایمیل"
-              type="email"
-              onChange={handleChangeemail}
-            />
-            <p className="errortext">{errors.email?.message}</p>
-          </div>
-          <div className="form-control">
+          <div className="btn-control">
             <label></label>
             <button className="log-button" type="submit">
               ورود
             </button>
             <div>
-              <button className="linktosign">
-                <Link to="/sign" className="linktosigntext">
-                  میخواهید اکانت بسازید ؟
-                </Link>
-              </button>
+              <Link to="/sign" className="linktosigntext">
+                <button className="linktosign">میخواهید اکانت بسازید ؟</button>
+              </Link>
             </div>
             <div className="repacparent">
               <ReCAPTCHA
@@ -146,7 +174,7 @@ const App = () => {
             </div>
           </div>
         </form>
-      </div>
+      </div> */}
     </>
   );
 };

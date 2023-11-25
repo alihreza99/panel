@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
-import store from "./../components/Redux/store";
+import {store} from "./../components/Redux/store";
 import { useParams } from "react-router-dom";
 
 
@@ -59,8 +59,7 @@ const App = () => {
       type: "edit",
       payload: viewModelstate,
     });
-    console.log(store.getState());
-    toast("Successfully created", {
+    toast("مشخصات آپدیت شد", {
       duration: 1000,
       position: "top-center",
       style: { background: "black", color: "white" },
@@ -75,7 +74,6 @@ const App = () => {
         "aria-live": "polite",
       },
     });
-    console.log(store.getState());
 
     reset();
   };

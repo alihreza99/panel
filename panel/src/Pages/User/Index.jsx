@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Userdatas } from "../../data";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import UserList from ".././../components/userlist"
-import store from "./../../components/Redux/store";
+import UserList from ".././../components/userlist";
+import { store } from "./../../components/Redux/store";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -14,15 +14,13 @@ export default function Index() {
   const [show, setShow] = useState(false);
   const [itemid, setItemid] = useState("");
 
-
-  function userdelete(){
+  function userdelete() {
     dispatch({
-      type: "log_out",
+      type: "delete",
       payload: itemid,
     });
     setuserdata(store.getState());
-    
-    
+
     setShow(false);
   }
 
@@ -57,7 +55,27 @@ export default function Index() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <table class="table-pedar">
+      <div class="cardform">
+        <p class="title">
+          <b>لیست کاربران</b>
+        </p>
+        <div class="user__container">
+          {userdata.log_control.entities.map((user, index) => {
+            return (
+              <UserList
+                user={user.username}
+                id={user.id}
+                transaction={user.transaction}
+                status={user.status}
+                email={user.email}
+                key={index}
+                deletehandler={handleShow}
+              />
+            );
+          })}
+        </div>
+      </div>
+      {/* <table class="table-pedar">
         <thead>
           <tr>
             <td>
@@ -90,7 +108,7 @@ export default function Index() {
             />
           );
         })}
-      </table>
+      </table> */}
     </>
   );
 }

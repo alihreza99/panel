@@ -7,6 +7,7 @@ const initState = {
       status: "deactive",
       transaction: "124.32$",
       email: "ali@gmail.com",
+      pass: "1234",
     },
     {
       username: "arshia",
@@ -15,6 +16,7 @@ const initState = {
       status: "deactive",
       transaction: "44.51$",
       email: "arshia@gmail.com",
+      pass: "1235",
     },
     {
       username: "sogand",
@@ -23,6 +25,7 @@ const initState = {
       status: "deactive",
       transaction: "255.11$",
       email: "sogand@gmail.com",
+      pass: "1236",
     },
     {
       username: "mahan",
@@ -31,6 +34,7 @@ const initState = {
       status: "deactive",
       transaction: "22.65$",
       email: "mahan@gmail.com",
+      pass: "1237",
     },
     {
       username: "reza",
@@ -39,8 +43,10 @@ const initState = {
       status: "deactive",
       transaction: "522.65$",
       email: "reza@gmail.com",
+      pass: "1238",
     },
   ],
+  admin: null,
 };
 
 export default function sign_log_control(state = initState, action) {
@@ -50,23 +56,22 @@ export default function sign_log_control(state = initState, action) {
       return {
         ...state,
         entities: [...state.entities, user],
+        admin: user,
       };
     case "log":
       const log = action.payload;
+      
       return {
         ...state,
-        entities: state.entities.map((user) => {
-          if (user.username == log.username) {
-            console.log("این یوزر وجود دارد");
-          } else {
-            console.log("این یوزر وجود ندارد");
-          }
-          return user;
-        }),
+        admin: log,
+      };
+    case "logout":
+      return {
+        ...state,
+        admin: null,
       };
     case "edit":
       const edit = action.payload;
-      console.log(edit.id);
       return {
         ...state,
         entities: state.entities.map((user) => {
@@ -77,14 +82,14 @@ export default function sign_log_control(state = initState, action) {
               status: edit.status,
               email: edit.email,
               transaction: edit.transaction,
-              id: edit.id
+              id: edit.id,
             };
           }
 
           return user;
         }),
       };
-    case "log_out":
+    case "delete":
       const deleteduserId = action.payload;
       console.log(deleteduserId);
       return {
