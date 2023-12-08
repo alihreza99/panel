@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import Reducer from './../reduserslide'
+import Reducer from '../components/reduserslide'
 
 const rootReducer = combineReducers({
-    log_control: Reducer
+    auth: Reducer
 })
 
 export default rootReducer

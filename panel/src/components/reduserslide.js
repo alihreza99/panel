@@ -4,7 +4,7 @@ const initState = {
   admin: null,
 };
 
-export default function sign_log_control(state = initState, action) {
+export default function sign_auth(state = initState, action) {
   switch (action.type) {
     case "sign":
       const user = action.payload;
@@ -14,11 +14,10 @@ export default function sign_log_control(state = initState, action) {
         admin: user,
       };
     case "log":
-      const log = action.payload;
-
+      const login = action.payload;
       return {
         ...state,
-        admin: log,
+        admin: login,
       };
     case "logout":
       return {
@@ -46,7 +45,6 @@ export default function sign_log_control(state = initState, action) {
       };
     case "delete":
       const deleteduserId = action.payload;
-      console.log(deleteduserId);
       return {
         ...state,
         entities: state.entities.filter((user) => user.id !== deleteduserId),
@@ -56,9 +54,5 @@ export default function sign_log_control(state = initState, action) {
   }
 }
 
-// export const addtousers = (text) => ({
-//   type: "sign",
-//   payload: text,
-// });
 
 export const selectusers = (state) => state.users.entities;

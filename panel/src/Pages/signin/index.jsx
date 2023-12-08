@@ -1,34 +1,48 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import toast from "react-hot-toast";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
-import { store } from "./../../components/Redux/store";
+import { store } from "../../redux/store";
 import { Link } from "react-router-dom";
+import Spinner from "../../components/spinner";
+import Form from "react-bootstrap/Form";
+import Toast from "../../components/toast";
 
 const schema = yup.object().shape({
   firstname: yup.string().required("لطفا نام خود را وارد کنید"),
-  price: yup.string().required("لطفا مبلغ  ورودی خود را وارد کنید"),
-  pass: yup.string().required("لطفا رمز خود را وارد کنید"),
-  email: yup.string().email().required("لطفا ایمیل خود را وارد کنید"),
+  price: yup
+    .number()
+    .typeError("لطفا مبلغ  ورودی خود را وارد کنید")
+    .required("لطفا مبلغ  ورودی خود را وارد کنید"),
+  pass: yup
+    .string()
+    .required("لطفا رمز خود را وارد کنید")
+    .min(4, "رمز شما باید حداقل دارای 4 عدد باشد"),
+  email: yup
+    .string()
+    .email("متن وارد شده اشتباه است ")
+    .required("لطفا ایمیل خود را وارد کنید"),
 });
-const App = () => {
+const Sign = () => {
   const dispatch = useDispatch();
   const recaptcha = useRef();
+  const [istoast, settoast] = useState(false);
+  const [istoast2, settoast2] = useState(false);
 
   let [data, setdata] = useState(
-    store.getState().log_control.entities[
-      store.getState().log_control.entities.length - 1
-    ].id
+    store.getState().auth.entities[store.getState().auth.entities.length - 1].id
   );
-
+  const [spinner, setSpinner] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setSpinner(false), 300);
+  }, []);
   let [viewModelstate, setviewModelstate] = useState({
     username: "",
     id: +data + 1,
     img: "./App/Pics/profilepic.jpg",
-    status: "active",
+    status: "فعال",
     transaction: "",
     pass: "",
     email: "",
@@ -39,7 +53,6 @@ const App = () => {
       ...viewModelstate,
       username: event.target.value,
     });
-    console.log("value is:", viewModelstate.id);
   };
   const handleChangepass = (event) => {
     setviewModelstate({
@@ -55,8 +68,6 @@ const App = () => {
   };
   const handleChangeemail = (event) => {
     setviewModelstate({ ...viewModelstate, email: event.target.value });
-
-    console.log("value is:", event.target.value);
   };
   const {
     register,
@@ -70,34 +81,20 @@ const App = () => {
   const onSubmit = () => {
     const captchaValue = recaptcha.current.getValue();
     if (!captchaValue) {
-      toast.error("Please verify the reCAPTCHA!");
+      settoast2(true);
+      setTimeout(() => settoast2(false), 1500);
     } else {
       setviewModelstate({
         ...viewModelstate,
         id: viewModelstate.id + 1,
       });
-      console.log("value is:", viewModelstate.id);
 
       dispatch({
         type: "sign",
         payload: viewModelstate,
       });
-      console.log(store.getState());
-      toast("اکانت با موفقیت ساخته شد", {
-        duration: 1000,
-        position: "top-center",
-        style: { background: "black", color: "white" },
-        className: "",
-        iconTheme: {
-          primary: "#000",
-          secondary: "#fff",
-        },
-
-        ariaProps: {
-          role: "status",
-          "aria-live": "polite",
-        },
-      });
+      settoast(true);
+      setTimeout(() => settoast(false), 1500);
       window.grecaptcha.reset();
       reset();
     }
@@ -105,151 +102,88 @@ const App = () => {
 
   return (
     <>
-      <div class="login-box login-box-sign">
-        <p>Sign in</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div class="user-box">
-            <input
-              {...register("firstname")}
-              type="text"
-              onChange={handleChangename}
-              autocomplete="off"
-            />
-            <label>
-              نام کاربری<sup>*</sup>
-            </label>
-            <p className="errortext">{errors.firstname?.message}</p>
-          </div>
-          <div class="user-box">
-            <input
-              {...register("pass")}
-              type="password"
-              onChange={handleChangepass}
-              autocomplete="off"
-            />
-            <label>
-              رمز ورود<sup>*</sup>
-            </label>
-            <p className="errortext">{errors.pass?.message}</p>
-          </div>
-          <div class="user-box">
-            <input
-              {...register("price")}
-              type="number"
-              onChange={handleChangeprice}
-              autocomplete="off"
-            />
-            <label>
-              مبلغ ورود<sup>*</sup>
-            </label>
-            <p className="errortext">{errors.price?.message}</p>
-          </div>
-          <div class="user-box">
-            <input
-              {...register("email")}
-              type="email"
-              onChange={handleChangeemail}
-              autocomplete="off"
-            />
-            <label>
-              ایمیل<sup>*</sup>
-            </label>
-            <p className="errortext">{errors.email?.message}</p>
-          </div>
-          <button className="log-button" type="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            ورود
-          </button>
-        </form>
-        <p>
-          اکانت دارید ؟{" "}
-          <Link to="/" className="linktosigntext">
-            LOGIN
-          </Link>
-          <div className="repacparent">
-            <ReCAPTCHA
-              ref={recaptcha}
-              className="recap"
-              sitekey="6Lf6KRQpAAAAAK0PHLUCqgyqHX_e8h2UsFMH7jyq"
-            />
-          </div>
-        </p>
-      </div>
-      {/* <div className="Log_form">
-        <h2 className="formtitle">ثبت نام</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control">
-            <label className="label">
-              نام<sup>*</sup>
-            </label>
-            <input
-              {...register("firstname")}
-              type="text"
-              onChange={handleChangename}
-            />
-            <p className="errortext">{errors.firstname?.message}</p>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              مبلغ ورود<sup>*</sup>
-            </label>
-            <input
-              {...register("price")}
-              type="number"
-              onChange={handleChangeprice}
-            />
-            <p className="errortext">{errors.price?.message}</p>
-          </div>
+      {istoast && <Toast text="کاربر با موفقیت اضافه شد" />}
+      {istoast2 && <Toast text="لظفا روی گزینه من ربات نیستم بزنید" />}
 
-          <div className="form-control">
-            <label className="label">
-              رمز ورود<sup>*</sup>
-            </label>
-            <input
-              {...register("pass")}
-              type="password"
-              onChange={handleChangepass}
-            />
-            <p className="errortext">{errors.pass?.message}</p>
-          </div>
-          <div className="form-control">
-            <label>
-              ایمیل<sup>*</sup>
-            </label>
-            <input
-              {...register("email")}
-              type="email"
-              onChange={handleChangeemail}
-            />
-            <p className="errortext">{errors.email?.message}</p>
-          </div>
-          <div className="btn-control">
-            <label></label>
+      {spinner && <Spinner />}
+      {!spinner && (
+        <div className="login-box login-box-sign">
+          <p>ثبت نام</p>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Label className="formlable">
+              نام کاربری<sup className="errortext">*</sup>
+            </Form.Label>
+            <div className="user-box">
+              <Form.Control
+                {...register("firstname")}
+                type="text"
+                onChange={handleChangename}
+                autocomplete="off"
+              />
+              <p className="errortext">{errors.firstname?.message}</p>
+            </div>
+            <Form.Label className="formlable">
+              رمز ورود<sup className="errortext">*</sup>
+            </Form.Label>
+            <div className="user-box">
+              <Form.Control
+                {...register("pass")}
+                type="password"
+                onChange={handleChangepass}
+                autocomplete="off"
+              />
+              <p className="errortext">{errors.pass?.message}</p>
+            </div>
+            <Form.Label className="formlable">
+              مبلغ ورود<sup className="errortext">*</sup>
+            </Form.Label>
+            <div className="user-box">
+              <Form.Control
+                {...register("price")}
+                type="number"
+                onChange={handleChangeprice}
+                autocomplete="off"
+              />
+              <p className="errortext">{errors.price?.message}</p>
+            </div>
+            <Form.Label className="formlable">
+              ایمیل<sup className="errortext">*</sup>
+            </Form.Label>
+            <div className="user-box">
+              <Form.Control
+                {...register("email")}
+                type="text"
+                onChange={handleChangeemail}
+                autocomplete="off"
+              />
+              <p className="errortext">{errors.email?.message}</p>
+            </div>
             <button className="log-button" type="submit">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
               ورود
             </button>
-            <div>
-              <button className="linktosign">
-                <Link to="/" className="linktosigntext">
-                  اکانت دارید ؟
-                </Link>
-              </button>
-            </div>
+          </form>
+          <p>
+            اکانت دارید ؟{" "}
+            <Link to="/" className="linktosigntext">
+              ورود
+            </Link>
             <div className="repacparent">
               <ReCAPTCHA
                 ref={recaptcha}
                 className="recap"
+                hl="fa"
                 sitekey="6Lf6KRQpAAAAAK0PHLUCqgyqHX_e8h2UsFMH7jyq"
               />
             </div>
-          </div>
-        </form>
-      </div> */}
+          </p>
+        </div>
+      )}
     </>
   );
 };
 
-export default App;
+export default Sign;
