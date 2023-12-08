@@ -20,8 +20,8 @@ import "./assets/Fonts/Vazir-Bold.ttf";
 import "./assets/Fonts/Vazir-Black-FD.ttf";
 import "./App.css";
 
-const Home = react.lazy(() => import("./page/home/Index"));
-const Userpage = react.lazy(() => import("./page/user/Index"));
+const Home = react.lazy(() => import("./page/home/index"));
+const Userpage = react.lazy(() => import("./page/user/index"));
 const Editpage = react.lazy(() => import("./page/user/editpage"));
 const Log = react.lazy(() => import("./page/login/index"));
 const Sign = react.lazy(() => import("./page/signin/index"));
