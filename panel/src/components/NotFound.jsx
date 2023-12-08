@@ -19,7 +19,7 @@ export default function NotFound() {
       </div>
       <div className="notfoundlinks">
         <Link className="link" to="/">
-          خانه{" "}
+          خانه
         </Link>
         <Link className="link" to="/">
           کاربران{" "}

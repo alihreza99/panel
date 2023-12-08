@@ -55,7 +55,7 @@ export default function Chart() {
     },
     {
       name: "بهمن",
-      sale: 22_125,
+      sale: 22_25,
     },
     {
       name: "اسفند",

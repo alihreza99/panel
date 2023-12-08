@@ -60,6 +60,7 @@ export default function UserIndex() {
   return (
     <>
       {istoast && <Toast text="کاربر با موفقیت حذف شد" />}
+      
       <Modal
         className="modal"
         show={show}

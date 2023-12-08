@@ -9,7 +9,7 @@ export default function Feature() {
           <div className="featurecontainer">
             <span className="featureItemMoney">2,136</span>
             <span className="featureItemRate">
-              -11.4 
+              -11.6
             </span>
           </div>
           <span className="Featuresub">در مقایسه با ماه قبل</span>

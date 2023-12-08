@@ -11,6 +11,7 @@ export default function Home() {
   return (
     <>
       {spinner && <Spinner />}
+
       <div className="dashboard">
         {!spinner && <Feature />}
         {!spinner && <Chart />}
