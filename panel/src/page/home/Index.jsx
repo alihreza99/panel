@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Feature from "../../components/Feature";
-import Chart from "../../components/Chart";
+import Feature from "../../components/feature";
+import Chart from "../../components/chart";
 import Spinner from "../../components/spinner";
 
 export default function Home() {

@@ -1,6 +1,6 @@
 import react, { Suspense } from "react";
 import Navbar from "./layout/navbar";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/notFound";
 import { Route, Routes } from "react-router";
 import { useSelector } from "react-redux";
 import Error from "./components/errorBoundary";
