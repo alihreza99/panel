@@ -14,7 +14,7 @@ import "./assets/css/user.css";
 import "./assets/css/form.css";
 import "./assets/css/notfound.css";
 import "./assets/css/font.css";
-import "./assets/css/errorpage.css"
+import "./assets/css/errorpage.css";
 import "./assets/Fonts/A-Iranian-Sans/iraniansans.ttf";
 import "./assets/Fonts/Vazir-Bold.ttf";
 import "./assets/Fonts/Vazir-Black-FD.ttf";
@@ -27,11 +27,8 @@ const Log = react.lazy(() => import("./page/login/index"));
 const Sign = react.lazy(() => import("./page/signin/index"));
 const Profile = react.lazy(() => import("./layout/profile"));
 
-
-
 function App() {
   const admin = useSelector((state) => state.auth.admin);
-
 
   return (
     <>
