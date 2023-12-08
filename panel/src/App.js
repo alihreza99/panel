@@ -4,7 +4,6 @@ import NotFound from "./components/notFound";
 import { Route, Routes } from "react-router";
 import { useSelector } from "react-redux";
 import Error from "./components/errorBoundary";
-
 import "./assets/Fonts/fontawesome-free-6.4.0-web/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/feature.css";
@@ -23,7 +22,7 @@ import "./App.css";
 const Home = react.lazy(() => import("./page/home/index"));
 const Userpage = react.lazy(() => import("./page/user/index"));
 const Editpage = react.lazy(() => import("./page/user/editpage"));
-const Log = react.lazy(() => import("./page/login/index"));
+const Login = react.lazy(() => import("./page/login/index"));
 const Sign = react.lazy(() => import("./page/signin/index"));
 const Profile = react.lazy(() => import("./layout/profile"));
 
@@ -49,7 +48,7 @@ function App() {
           {!admin && (
             <>
               <Routes>
-                <Route path="/" element={<Log />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/sign" element={<Sign />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

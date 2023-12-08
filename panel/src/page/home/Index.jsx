@@ -6,7 +6,7 @@ import Spinner from "../../components/spinner";
 export default function Home() {
   const [spinner, setSpinner] = useState(true);
   useEffect(() => {
-    setTimeout(() => setSpinner(false), 300);
+    setTimeout(() => setSpinner(false), 250);
   }, []);
   return (
     <>

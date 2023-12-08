@@ -40,7 +40,7 @@ export default function UserIndex() {
 
   function userdelete() {
     settoast(true);
-    setTimeout(() => settoast(false), 1500);
+    setTimeout(() => settoast(false), 1300);
     dispatch({
       type: "delete",
       payload: itemid,

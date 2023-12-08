@@ -15,7 +15,7 @@ export default function Chart() {
     },
     {
       name: "فروردین",
-      sale: 66_552,
+      sale: 66_52,
     },
     {
       name: "اردیبهشت",
