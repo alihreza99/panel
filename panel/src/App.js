@@ -1,6 +1,6 @@
 import react, { Suspense } from "react";
 import Navbar from "./layout/navbar";
-import NotFound from "./components/notFound";
+import NotFound from "./components/NotFound";
 import { Route, Routes } from "react-router";
 import { useSelector } from "react-redux";
 import Error from "./components/errorBoundary";
@@ -20,11 +20,11 @@ import "./assets/Fonts/Vazir-Bold.ttf";
 import "./assets/Fonts/Vazir-Black-FD.ttf";
 import "./App.css";
 
-const Home = react.lazy(() => import("./pages/home/index"));
-const Userpage = react.lazy(() => import("./pages/user/index"));
-const Editpage = react.lazy(() => import("./pages/user/editpage"));
-const Log = react.lazy(() => import("./pages/login/index.jsx"));
-const Sign = react.lazy(() => import("./pages/signin/index.jsx"));
+const Home = react.lazy(() => import("./page/home/Index"));
+const Userpage = react.lazy(() => import("./page/user/Index"));
+const Editpage = react.lazy(() => import("./page/user/editpage"));
+const Log = react.lazy(() => import("./page/login/index"));
+const Sign = react.lazy(() => import("./page/signin/index"));
 const Profile = react.lazy(() => import("./layout/profile"));
 
 
