@@ -1,8 +1,8 @@
-.title, .more {
+.title,
+.more {
   padding: 10px 15px;
-
 }
-.title b{
+.title b {
   font-size: 30px;
 }
 
@@ -21,16 +21,15 @@
   flex-grow: 1;
 }
 
-
 .title {
   font-weight: 900;
   font-size: 1.3em;
 }
-.text{
+.text {
   margin-right: 10px;
 }
 
-.usersbtns button{
+.usersbtns button {
   margin-right: 10px;
   width: 150px;
 }
@@ -39,7 +38,7 @@
 }
 
 .username {
-  font-size: .9em;
+  font-size: 0.9em;
   color: #64696e;
 }
 
@@ -47,7 +46,11 @@
   width: 60px;
   height: 60px;
   background: rgb(47, 47, 49);
-  background: linear-gradient(295deg, rgb(149, 148, 160) 41%, rgb(76, 77, 78) 100%);
+  background: linear-gradient(
+    295deg,
+    rgb(149, 148, 160) 41%,
+    rgb(76, 77, 78) 100%
+  );
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -76,7 +79,7 @@
   background-color: #b3b6b6;
   border-radius: 0px 0px 15px 15px;
 }
-.deleteuser{
+.deleteuser {
   border: none;
   border-radius: 25px;
   background-color: #720a10;
@@ -196,7 +199,7 @@ label > sup {
   border-radius: 10px;
   margin-top: 50px;
 }
-.login-box-sign{
+.login-box-sign {
   direction: rtl;
   position: absolute;
   top: 80%;
@@ -237,13 +240,12 @@ label > sup {
   outline: none;
   background: transparent;
 }
-.errortext{
+.errortext {
   color: red !important;
   direction: rtl;
-
 }
 
-.formlable{
+.formlable {
   direction: rtl;
   font-size: 16px;
   color: #fff;
@@ -259,7 +261,7 @@ label > sup {
   font-size: 12px;
 }
 
-.log-button{
+.log-button {
   direction: rtl;
   position: relative;
   display: inline-block;
@@ -395,7 +397,7 @@ label > sup {
 }
 
 @media only screen and (max-width: 800px) {
-  .login-box{
+  .login-box {
     margin-top: 100px;
   }
   .Log_form {
@@ -405,8 +407,8 @@ label > sup {
     position: relative;
     margin-left: 0;
   }
-  .usersbtns button{
-  margin-right: 10px;
-  width: 90px;
-}
+  .usersbtns button {
+    margin-right: 10px;
+    width: 90px;
+  }
 }

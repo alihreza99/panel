@@ -17,7 +17,7 @@ p {
   color: rgb(15, 80, 88);
   text-decoration: none;
 }
-.notfoundlinks{
+.notfoundlinks {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -102,7 +102,7 @@ p {
   width: 1.1rem;
   fill: currentColor;
 }
-.ml-auto{
+.ml-auto {
   width: 250px;
   display: flex;
   flex-direction: row;

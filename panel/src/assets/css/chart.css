@@ -1,12 +1,12 @@
-.chart{
-    margin: 20px;
-    padding: 20px;
-    box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
-    direction: rtl;
+.chart {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
+  direction: rtl;
 }
-.charttitle{
-    margin-bottom: 20px;
-    color: white;
+.charttitle {
+  margin-bottom: 20px;
+  color: white;
 }
 .page-item1 {
   position: fixed;
@@ -29,7 +29,6 @@
   border-radius: 50px;
   animation: nextPage 0.5s forwards;
   margin-left: 52%;
-
 }
 @keyframes nextPage {
   0% {

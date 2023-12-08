@@ -133,10 +133,10 @@ tbody td div b {
   background-color: rgb(15, 15, 15);
   color: aliceblue;
 }
-.Text{
+.Text {
   color: aliceblue;
 }
-#text{
+#text {
   color: aliceblue;
 }
 .table-pedar {
@@ -168,14 +168,13 @@ thead {
   flex-direction: column;
 }
 
-.profilepagelink{
+.profilepagelink {
   margin-right: 10px;
   text-decoration: none;
   color: #eee;
 }
 
-
-.theadtop{
+.theadtop {
   position: absolute;
   width: 100%;
 }

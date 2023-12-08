@@ -70,14 +70,14 @@ const EditPage = () => {
       type: "edit",
       payload: viewModelstate,
     });
-    settoast(true)
+    settoast(true);
     setTimeout(() => settoast(false), 1500);
 
     reset();
   };
   return (
     <>
-      {istoast && <Toast text="اطلاعات با موفقیت آپدیت شد"/>}
+      {istoast && <Toast text="اطلاعات با موفقیت آپدیت شد" />}
       {spinner && <Spinner />}
       {!spinner && (
         <div className="Log_form">

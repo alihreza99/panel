@@ -1,14 +1,13 @@
 import Container from "react-bootstrap/Container";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Navbar, Nav} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-function NavbarIndex({Admin}) {
+function NavbarIndex({ Admin }) {
   const admin = useSelector((state) => state.auth.admin);
   const dispatch = useDispatch();
 
-  
   return (
     <>
       <Navbar bg="dark" data-bs-theme="dark" key={false} id="basic-navbar-nav">
