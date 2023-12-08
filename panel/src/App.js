@@ -4,7 +4,6 @@ import NotFound from "./components/notFound";
 import { Route, Routes } from "react-router";
 import { useSelector } from "react-redux";
 import Error from "./components/errorBoundary";
-import { Toaster } from "react-hot-toast";
 
 import "./assets/Fonts/fontawesome-free-6.4.0-web/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,11 +20,11 @@ import "./assets/Fonts/Vazir-Bold.ttf";
 import "./assets/Fonts/Vazir-Black-FD.ttf";
 import "./App.css";
 
-const Home = react.lazy(() => import("./Pages/home/index"));
-const Userpage = react.lazy(() => import("./Pages/user/index"));
-const EditPage = react.lazy(() => import("./Pages/user/editpage"));
-const Log = react.lazy(() => import("./Pages/login/index.jsx"));
-const Sign = react.lazy(() => import("./Pages/signin/index.jsx"));
+const Home = react.lazy(() => import("./pages/home/index"));
+const Userpage = react.lazy(() => import("./pages/user/index"));
+const Editpage = react.lazy(() => import("./pages/user/editpage"));
+const Log = react.lazy(() => import("./pages/login/index.jsx"));
+const Sign = react.lazy(() => import("./pages/signin/index.jsx"));
 const Profile = react.lazy(() => import("./layout/profile"));
 
 
@@ -36,7 +35,6 @@ function App() {
 
   return (
     <>
-      <Toaster />
       <Error>
         <Suspense>
           {admin && (
@@ -45,7 +43,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/user" element={<Userpage />} />
-                <Route path="/user/:id" element={<EditPage />} />
+                <Route path="/user/:id" element={<Editpage />} />
                 <Route path="/profile/:id" element={<Profile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
